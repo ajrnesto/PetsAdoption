@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ViewApplicationFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvTimestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/plusjakartasans_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/green_olive"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvStatus"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="January 1, 2022" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/plusjakartasans_medium"
+                android:textColor="@color/red_dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/tilStatus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilStatus"
+                tools:text="Status" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilStatus"
+                style="@style/PetsAdoption.DropDownMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:hint="Status"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvStatus"
+                app:layout_constraintEnd_toEndOf="@+id/tvStatus"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/menuStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/materialDivider4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvPetInformation"
+                style="@style/PetsAdoption.CardView.Invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialDivider4">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        style="@style/PetsAdoption.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pet Information"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPetNameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Name: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+                    <TextView
+                        android:id="@+id/tvPetName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPetNameTitle"
+                        app:layout_constraintEnd_toStartOf="@+id/imgPetPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvPetNameTitle"
+                        tools:text="Pet Name" />
+
+                    <TextView
+                        android:id="@+id/tvPetSexTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Sex: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPetName" />
+
+                    <TextView
+                        android:id="@+id/tvPetSex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPetSexTitle"
+                        app:layout_constraintStart_toEndOf="@+id/tvPetSexTitle"
+                        tools:text="Pet Sex" />
+
+                    <TextView
+                        android:id="@+id/tvPetAgeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Age: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPetSexTitle" />
+
+                    <TextView
+                        android:id="@+id/tvPetAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPetAgeTitle"
+                        app:layout_constraintStart_toEndOf="@+id/tvPetAgeTitle"
+                        tools:text="Pet Age" />
+
+                    <TextView
+                        android:id="@+id/tvPetWeightTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Weight: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPetAgeTitle" />
+
+                    <TextView
+                        android:id="@+id/tvPetWeight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgPetPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvPetWeightTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvPetWeightTitle"
+                        tools:text="Pet Weight" />
+
+                    <TextView
+                        android:id="@+id/tvPetLocationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Location: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPetWeight" />
+
+                    <TextView
+                        android:id="@+id/tvPetLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgPetPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvPetLocationTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvPetLocationTitle"
+                        tools:text="Pet Location" />
+
+                    <TextView
+                        android:id="@+id/tvPetPersonalityTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Personality: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPetLocation" />
+
+                    <TextView
+                        android:id="@+id/tvPetPersonality"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgPetPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvPetPersonalityTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvPetPersonalityTitle"
+                        tools:text="Pet Personality" />
+
+                    <TextView
+                        android:id="@+id/tvPetHealthNotesTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Health Notes: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPetPersonality" />
+
+                    <TextView
+                        android:id="@+id/tvPetHealthNotes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvPetHealthNotesTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvPetHealthNotesTitle"
+                        tools:text="Pet Health Notes" />
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imgPetPhoto"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8"
+                        app:riv_corner_radius="16dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvApplicantInformation"
+                style="@style/PetsAdoption.CardView.Invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvPetInformation">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        style="@style/PetsAdoption.TextView.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Applicant Information"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantNameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Name: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgUserPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantNameTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantNameTitle"
+                        tools:text="Applicant Name" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantEmailTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Email: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantName" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantEmail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgUserPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantEmailTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantNameTitle"
+                        tools:text="Applicant Email" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantMobileTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Mobile: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantEmail" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantMobile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imgUserPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantMobileTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantEmailTitle"
+                        tools:text="Applicant Mobile" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantAddressTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Address: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantMobile" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantAddress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imgUserPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantAddressTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantAddressTitle"
+                        tools:text="Applicant Address" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantIsPetOwnerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Do you own any pets?: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantAddress" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantIsPetOwner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgUserPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantIsPetOwnerTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantIsPetOwnerTitle"
+                        tools:text="Yes/No" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantPetNamesTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Pet Names: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantIsPetOwner" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantPetNames"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imgUserPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantPetNamesTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantPetNamesTitle"
+                        tools:text="Pet Names" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantPetBreedsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Pet Breeds: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantPetNames" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantPetBreeds"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantPetBreedsTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantPetBreedsTitle"
+                        tools:text="Pet Breeds" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantPetDispositionTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Pets' disposition towards other pets: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantPetBreeds" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantPetDisposition"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantPetDispositionTitle"
+                        tools:text="Pet Disposition" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantVetMobileTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Vet's mobile number: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantPetDisposition" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantVetMobile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantVetMobileTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantVetMobileTitle"
+                        tools:text="09123456789" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantIsHomeOwnerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Do you own or rent your home?: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantVetMobile" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantIsHomeOwner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantIsHomeOwnerTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantIsHomeOwnerTitle"
+                        tools:text="Own/Rent" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantHasYardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Do you have a yard?: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantIsHomeOwner" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantHasYard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantHasYardTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantHasYardTitle"
+                        tools:text="Yes/No" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantIsYardFencedTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Is your yard fenced? Please describe: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantHasYard" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantIsYardFenced"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantIsYardFencedTitle"
+                        tools:text="Yard fence description" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantHasChildrenTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="Are there children in the home?: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantIsYardFenced" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantHasChildren"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantHasChildrenTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantHasChildrenTitle"
+                        tools:text="Yes/No" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantChildrenAgesTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_light"
+                        android:text="List the ages of the children: "
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApplicantHasChildren" />
+
+                    <TextView
+                        android:id="@+id/tvApplicantChildrenAges"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/green_olive"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvApplicantChildrenAgesTitle"
+                        app:layout_constraintTop_toTopOf="@+id/tvApplicantChildrenAgesTitle"
+                        tools:text="Children Ages" />
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imgUserPhoto"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        app:riv_corner_radius="16dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>

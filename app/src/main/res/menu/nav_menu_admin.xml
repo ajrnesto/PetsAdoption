@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/miAdopt"
+            android:title="Pets"
+            android:icon="@drawable/paw_24"
+            android:checked="true" />
+        <item android:id="@+id/miAddPet"
+            android:title="Add Pet"
+            android:icon="@drawable/add_24"/>
+        <item android:id="@+id/miApplications"
+            android:title="Applications"
+            android:icon="@drawable/document_24"/>
+        <item android:id="@+id/miMessages"
+            android:title="Messages"
+            android:icon="@drawable/message_24"/>
+    </group>
+</menu>

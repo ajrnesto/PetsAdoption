@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/miAdopt"
+            android:title="Adopt"
+            android:icon="@drawable/paw_24"
+            android:checked="true" />
+        <item android:id="@+id/miFavorites"
+            android:title="Favorites"
+            android:icon="@drawable/heart_24"/>
+        <item android:id="@+id/miApplications"
+            android:title="Applications"
+            android:icon="@drawable/document_24"/>
+        <item android:id="@+id/miMessages"
+            android:title="Chat with us"
+            android:icon="@drawable/message_24"/>
+        <item android:id="@+id/miProfile"
+            android:title="Profile"
+            android:icon="@drawable/user_24"/>
+    </group>
+</menu>

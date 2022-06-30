@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AddPetFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="36dp"
+            android:paddingBottom="36dp">
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cgAnimals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:paddingHorizontal="16dp"
+                    app:chipSpacingVertical="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDog"
+                        android:layout_width="64dp"
+                        android:layout_height="60dp"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:textAppearance="@style/ChipTextAppearance"
+                        android:textColor="@drawable/fg_chip_state"
+                        app:chipBackgroundColor="@drawable/bg_chip_state"
+                        app:chipEndPadding="16dp"
+                        app:chipIcon="@drawable/chip_dog"
+                        app:chipIconSize="32dp"
+                        app:chipIconTint="@drawable/fg_chip_state"
+                        app:chipStartPadding="16dp"
+                        app:chipStrokeColor="@color/green_light" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCat"
+                        android:layout_width="64dp"
+                        android:layout_height="60dp"
+                        android:checkable="true"
+                        android:textAppearance="@style/ChipTextAppearance"
+                        android:textColor="@drawable/fg_chip_state"
+                        app:chipBackgroundColor="@drawable/bg_chip_state"
+                        app:chipEndPadding="16dp"
+                        app:chipIcon="@drawable/chip_cat"
+                        app:chipIconEnabled="true"
+                        app:chipIconSize="32dp"
+                        app:chipIconTint="@drawable/fg_chip_state"
+                        app:chipStartPadding="16dp"
+                        app:chipStrokeColor="@color/green_light" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipRabbit"
+                        android:layout_width="64dp"
+                        android:layout_height="60dp"
+                        android:checkable="true"
+                        android:textAppearance="@style/ChipTextAppearance"
+                        android:textColor="@drawable/fg_chip_state"
+                        app:chipBackgroundColor="@drawable/bg_chip_state"
+                        app:chipEndPadding="18dp"
+                        app:chipIcon="@drawable/chip_rabbit"
+                        app:chipIconEnabled="true"
+                        app:chipIconSize="26dp"
+                        app:chipIconTint="@drawable/fg_chip_state"
+                        app:chipStartPadding="18dp"
+                        app:chipStrokeColor="@color/green_light" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBird"
+                        android:layout_width="64dp"
+                        android:layout_height="60dp"
+                        android:checkable="true"
+                        android:textAppearance="@style/ChipTextAppearance"
+                        android:textColor="@drawable/fg_chip_state"
+                        app:chipBackgroundColor="@drawable/bg_chip_state"
+                        app:chipEndPadding="18dp"
+                        app:chipIcon="@drawable/chip_bird"
+                        app:chipIconEnabled="true"
+                        app:chipIconSize="26dp"
+                        app:chipIconTint="@drawable/fg_chip_state"
+                        app:chipStartPadding="18dp"
+                        app:chipStrokeColor="@color/green_light" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvPetPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tilPetName"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cvPicture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="@android:color/transparent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/green_olive">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/imgPet"
+                            android:layout_width="140dp"
+                            android:layout_height="120dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGallery"
+                        style="@style/PetsAdoption.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Gallery"
+                        app:icon="@drawable/picture_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cvPicture" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPetName"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="Pet Name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cvPetPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPetName"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBreed"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:hint="Breed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cvPetPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/tilPetName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBreed"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapSentences" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilAgeYears"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="Age (Years)"
+                app:layout_constraintEnd_toStartOf="@+id/tilAgeMonths"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cvPetPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/tilBreed">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAgeYears"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilAgeMonths"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="(Months)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tilAgeYears"
+                app:layout_constraintTop_toBottomOf="@+id/tilBreed">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAgeMonths"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSex"
+                style="@style/PetsAdoption.DropDownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:hint="Sex"
+                app:layout_constraintEnd_toStartOf="@+id/tilWeight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilAgeYears">
+
+                <AutoCompleteTextView
+                    android:id="@+id/menuSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilWeight"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Weight (kg)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tilAgeYears"
+                app:layout_constraintTop_toBottomOf="@+id/tilAgeYears">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etWeight"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLocation"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilSex">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLocation"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPersonality"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Personality"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilLocation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPersonality"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilHealthNotes"
+                style="@style/PetsAdoption.TIL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Health Notes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilPersonality">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etHealthNotes"
+                    style="@style/PetsAdoption.TIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                style="@style/PetsAdoption.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Save Pet Information"
+                app:icon="@drawable/save_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilHealthNotes" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/green_light"
+        android:visibility="gone"
+        app:cardCornerRadius="0dp"
+        app:strokeWidth="0dp"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/linearProgressIndicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="@color/green_olive"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:trackColor="@color/green_light" />
+
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/PetsAdoption.TextView.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Uploading Pet Information"
+                android:textColor="@color/green_olive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

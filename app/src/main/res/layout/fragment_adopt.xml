@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AdoptFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgAnimals"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="16dp"
+            app:chipSpacingVertical="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDog"
+                android:layout_width="64dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:checked="true"
+                android:textAppearance="@style/ChipTextAppearance"
+                android:textColor="@drawable/fg_chip_state"
+                app:chipBackgroundColor="@drawable/bg_chip_state"
+                app:chipEndPadding="16dp"
+                app:chipIcon="@drawable/chip_dog"
+                app:chipIconSize="32dp"
+                app:chipIconTint="@drawable/fg_chip_state"
+                app:chipStartPadding="16dp"
+                app:chipStrokeColor="@color/green_light" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCat"
+                android:layout_width="64dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:textAppearance="@style/ChipTextAppearance"
+                android:textColor="@drawable/fg_chip_state"
+                app:chipBackgroundColor="@drawable/bg_chip_state"
+                app:chipEndPadding="16dp"
+                app:chipIcon="@drawable/chip_cat"
+                app:chipIconEnabled="true"
+                app:chipIconSize="32dp"
+                app:chipIconTint="@drawable/fg_chip_state"
+                app:chipStartPadding="16dp"
+                app:chipStrokeColor="@color/green_light" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRabbit"
+                android:layout_width="64dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:textAppearance="@style/ChipTextAppearance"
+                android:textColor="@drawable/fg_chip_state"
+                app:chipBackgroundColor="@drawable/bg_chip_state"
+                app:chipEndPadding="18dp"
+                app:chipIcon="@drawable/chip_rabbit"
+                app:chipIconEnabled="true"
+                app:chipIconSize="26dp"
+                app:chipIconTint="@drawable/fg_chip_state"
+                app:chipStartPadding="18dp"
+                app:chipStrokeColor="@color/green_light" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipBird"
+                android:layout_width="64dp"
+                android:layout_height="60dp"
+                android:checkable="true"
+                android:textAppearance="@style/ChipTextAppearance"
+                android:textColor="@drawable/fg_chip_state"
+                app:chipBackgroundColor="@drawable/bg_chip_state"
+                app:chipEndPadding="18dp"
+                app:chipIcon="@drawable/chip_bird"
+                app:chipIconEnabled="true"
+                app:chipIconSize="26dp"
+                app:chipIconTint="@drawable/fg_chip_state"
+                app:chipStartPadding="18dp"
+                app:chipStrokeColor="@color/green_light" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/tvEmpty"
+            style="@style/PetsAdoption.TextView.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No pets added yet"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPets"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingVertical="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cgAnimals" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loadingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cgAnimals" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

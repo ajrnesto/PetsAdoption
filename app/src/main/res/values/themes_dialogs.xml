@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PetsAdoption.Dialog" parent="MaterialAlertDialog.Material3">
+        <item name="colorPrimary">@color/green_olive</item>
+    </style>
+</resources>

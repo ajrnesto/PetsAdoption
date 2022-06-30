@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PetsAdoption.ActionBar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/PetsAdoption.ActionBar.TextAppearance</item>
+        <item name="android:background">@color/green_light</item>
+        <item name="navigationIconTint">@color/green_olive</item>
+    </style>
+
+    <style name="PetsAdoption.ActionBar.TextAppearance" parent="">
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">@color/green_olive</item>
+    </style>
+</resources>
