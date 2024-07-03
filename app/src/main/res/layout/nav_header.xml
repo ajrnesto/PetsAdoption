@@ -49,9 +49,23 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:text="Loading..."
+        tools:visibility="gone"
         android:textColor="@color/green_olive"
-        app:layout_constraintBottom_toTopOf="@+id/materialDivider"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignin"
         app:layout_constraintEnd_toStartOf="@+id/btnSignOut"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSignin"
+        style="@style/PetsAdoption.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign in"
+        android:layout_marginBottom="16dp"
+        app:icon="@drawable/sign_in_24"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton

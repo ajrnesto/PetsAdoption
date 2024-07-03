@@ -37,7 +37,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     TextInputEditText etLoginEmail, etLoginPassword;
     TextInputEditText etSignupFirstName, etSignupLastName, etSignupMobile, etSignupEmail, etSignupPassword;
     TextView textView;
-    MaterialButton btnLogin, btnSignup;
+    MaterialButton btnLogin, btnSignup, btnSkip;
 
     int focusCount = 0;
 
@@ -65,6 +65,11 @@ public class AuthenticationActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(view -> {
             authentication();
         });
+
+        btnSkip.setOnClickListener(view -> {
+            startActivity(new Intent(AuthenticationActivity.this, UserActivity.class));
+            finish();
+        });
     }
 
     @Override
@@ -85,6 +90,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         etLoginEmail = findViewById(R.id.etLoginEmail);
         etLoginPassword = findViewById(R.id.etLoginPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        btnSkip = findViewById(R.id.btnSkip);
         // sign up
         cvSignup = findViewById(R.id.cvSignup);
         etSignupFirstName = findViewById(R.id.etSignupFirstName);

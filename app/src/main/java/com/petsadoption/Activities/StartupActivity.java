@@ -28,7 +28,7 @@ public class StartupActivity extends AppCompatActivity {
     private DatabaseReference refUser;
 
     RoundedImageView ivLogo;
-    MaterialButton btnGetStarted;
+    MaterialButton btnSignIn, btnSkip;
     MaterialCardView cvGetStarted;
 
     @Override
@@ -65,7 +65,8 @@ public class StartupActivity extends AppCompatActivity {
     private void initialize() {
         ivLogo = findViewById(R.id.ivLogo);
         cvGetStarted = findViewById(R.id.cvGetStarted);
-        btnGetStarted = findViewById(R.id.btnGetStarted);
+        btnSignIn = findViewById(R.id.btnSignin);
+        btnSkip = findViewById(R.id.btnSkip);
     }
 
     private void startLoading() {
@@ -78,8 +79,12 @@ public class StartupActivity extends AppCompatActivity {
     private void loadingComplete() {
         ivLogo.setVisibility(View.GONE);
         cvGetStarted.setVisibility(View.VISIBLE);
-        btnGetStarted.setOnClickListener(view -> {
+        btnSignIn.setOnClickListener(view -> {
             startActivity(new Intent(this, AuthenticationActivity.class));
+        });
+        btnSkip.setOnClickListener(view -> {
+            startActivity(new Intent(this, UserActivity.class));
+            finish();
         });
     }
 }

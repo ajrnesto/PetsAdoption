@@ -33,12 +33,12 @@ import java.util.ArrayList;
 
 public class AdoptFragment extends Fragment implements PetAdapter.OnPetListener {
 
-    private static final FirebaseUser USER = FirebaseAuth.getInstance().getCurrentUser();
-    private static final FirebaseDatabase PETS_DB = FirebaseDatabase.getInstance();
-    private static final FirebaseStorage PETS_ST = FirebaseStorage.getInstance();
-    private DatabaseReference dbPets = PETS_DB.getReference("pets");
-    private DatabaseReference dbFavs = PETS_DB.getReference("user_"+USER.getUid()+"_favourites");
-    private StorageReference stPets = PETS_ST.getReference("petPhotos");
+    private FirebaseUser USER = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseDatabase PETS_DB = FirebaseDatabase.getInstance();
+    private FirebaseStorage PETS_ST = FirebaseStorage.getInstance();
+    private DatabaseReference dbPets;
+    private DatabaseReference dbFavs;
+    private StorageReference stPets;
     private Query qryPets;
     private ValueEventListener velPets, velFavs;
 
@@ -77,6 +77,11 @@ public class AdoptFragment extends Fragment implements PetAdapter.OnPetListener 
         tvEmpty = view.findViewById(R.id.tvEmpty);
         cgAnimals = view.findViewById(R.id.cgAnimals);
         loadingBar = view.findViewById(R.id.loadingBar);
+        dbPets = PETS_DB.getReference("pets");
+        if (USER != null) {
+            dbFavs = PETS_DB.getReference("user_"+USER.getUid()+"_favourites");
+        }
+        stPets = PETS_ST.getReference("petPhotos");
 
         loadRecyclerView(R.id.chipDog);
     }
@@ -101,19 +106,21 @@ public class AdoptFragment extends Fragment implements PetAdapter.OnPetListener 
             qryPets = dbPets.orderByChild("animal").equalTo("Bird");
         }
 
-        velFavs = dbFavs.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    arrFavs.add(dataSnapshot.getValue().toString());
+        if (USER != null) {
+            velFavs = dbFavs.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        arrFavs.add(dataSnapshot.getValue().toString());
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
 
         velPets = qryPets.addValueEventListener(new ValueEventListener() {
             @Override
@@ -139,9 +146,16 @@ public class AdoptFragment extends Fragment implements PetAdapter.OnPetListener 
             }
         });
 
-        petAdapter = new PetAdapter(getContext(), USER.getEmail(), arrPets, arrFavs, onPetListener);
-        rvPets.setAdapter(petAdapter);
-        petAdapter.notifyDataSetChanged();
+        if (USER != null) {
+            petAdapter = new PetAdapter(getContext(), USER.getEmail(), arrPets, arrFavs, onPetListener);
+            rvPets.setAdapter(petAdapter);
+            petAdapter.notifyDataSetChanged();
+        }
+        else {
+            petAdapter = new PetAdapter(getContext(), "No email", arrPets, arrFavs, onPetListener);
+            rvPets.setAdapter(petAdapter);
+            petAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

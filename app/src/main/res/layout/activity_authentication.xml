@@ -179,6 +179,20 @@
                         android:text="Login"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tilLoginPassword" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSkip"
+                        style="@style/PetsAdoption.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:backgroundTint="@android:color/transparent"
+                        app:icon="@drawable/arrow_right_24"
+                        app:iconGravity="textEnd"
+                        android:text="Skip"
+                        app:layout_constraintEnd_toStartOf="@+id/btnLogin"
+                        app:layout_constraintTop_toBottomOf="@+id/tilLoginPassword" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 

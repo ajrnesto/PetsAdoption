@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,7 +60,7 @@ public class UserActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     MenuItem miAdopt, miFavorites, miApplications, miMessages;
     TextView tvUserName, tvUserEmail, tvActivityTitle;
-    MaterialButton btnSignOut, btnActionBar;
+    MaterialButton btnSignOut, btnSignin, btnActionBar;
     RoundedImageView imgUserPhoto;
 
     @Override
@@ -128,41 +130,64 @@ public class UserActivity extends AppCompatActivity {
         headerView = navView.getHeaderView(0);
         tvUserName = headerView.findViewById(R.id.tvUserName);
         tvUserEmail = headerView.findViewById(R.id.tvUserEmail);
-        Toast.makeText(this, "email: "+USER.getEmail(), Toast.LENGTH_SHORT).show();
         btnSignOut = headerView.findViewById(R.id.btnSignOut);
+        btnSignin = headerView.findViewById(R.id.btnSignin);
         imgUserPhoto = headerView.findViewById(R.id.imgUserPhoto);
         miAdopt = findViewById(R.id.miAdopt);
         miFavorites = findViewById(R.id.miFavorites);
         miApplications = findViewById(R.id.miApplications);
         miMessages = findViewById(R.id.miMessages);
 
+        if (USER != null) {
+            Toast.makeText(this, "email: "+USER.getEmail(), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "Welcome to PetsAdoption!", Toast.LENGTH_SHORT).show();
+        }
+
         // header
-        refUser = PETS_DB.getReference("user_"+USER.getUid());
-        refUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String firstName = Objects.requireNonNull(snapshot.child("firstName").getValue()).toString();
-                String lastName = Objects.requireNonNull(snapshot.child("lastName").getValue()).toString();
-                tvUserName.setText(firstName + " " + lastName);
+        if (USER != null) {
+            refUser = PETS_DB.getReference("user_"+USER.getUid());
+            refUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String firstName = Objects.requireNonNull(snapshot.child("firstName").getValue()).toString();
+                    String lastName = Objects.requireNonNull(snapshot.child("lastName").getValue()).toString();
+                    tvUserName.setText(firstName + " " + lastName);
 
-                if (snapshot.child("photoUrl").exists()) {
-                    Picasso.get().load(Objects.requireNonNull(snapshot.child("photoUrl").getValue()).toString()).fit().centerCrop().into(imgUserPhoto);
+                    if (snapshot.child("photoUrl").exists()) {
+                        Picasso.get().load(Objects.requireNonNull(snapshot.child("photoUrl").getValue()).toString()).fit().centerCrop().into(imgUserPhoto);
+                    }
+                    else {
+                        Picasso.get().load(Utils.getDefaultPhotoUrl()).fit().centerCrop().into(imgUserPhoto);
+                    }
+
                 }
-                else {
-                    Picasso.get().load(Utils.getDefaultPhotoUrl()).fit().centerCrop().into(imgUserPhoto);
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
+            });
+            tvUserEmail.setText(USER.getEmail());
+        }
+        else {
+            Picasso.get().load(Utils.getDefaultPhotoUrl()).fit().centerCrop().into(imgUserPhoto);
+            tvUserName.setText("Guest");
+            tvUserEmail.setText("No email");
+            tvUserEmail.setVisibility(View.GONE);
+            btnSignOut.setVisibility(View.GONE);
+            btnSignin.setVisibility(View.VISIBLE);
+        }
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        tvUserEmail.setText(USER.getEmail());
         btnSignOut.setOnClickListener(view -> {
             Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();
             AUTH.signOut();
+            startActivity(new Intent(this, AuthenticationActivity.class));
+            finishAffinity();
+        });
+
+        btnSignin.setOnClickListener(view -> {
             startActivity(new Intent(this, AuthenticationActivity.class));
             finishAffinity();
         });
@@ -176,6 +201,16 @@ public class UserActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Adopt");
 
+        MaterialAlertDialogBuilder dialogLoginRequired = new MaterialAlertDialogBuilder(UserActivity.this);
+        dialogLoginRequired.setTitle("Sign in required");
+        dialogLoginRequired.setMessage("You need an account to access this feature.");
+        dialogLoginRequired.setPositiveButton("Log in", (dialogInterface, i) -> {
+            startActivity(new Intent(this, AuthenticationActivity.class));
+            finish();
+        });
+        dialogLoginRequired.setNeutralButton("Cancel", (dialogInterface, i) -> { });
+        dialogLoginRequired.setOnDismissListener(dialogInterface -> navView.getMenu().getItem(0).setChecked(true));
+
         navView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.miAdopt) {
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Adopt");
@@ -186,42 +221,61 @@ public class UserActivity extends AppCompatActivity {
                         .commit();
             }
             else if (item.getItemId() == R.id.miFavorites) {
-                Objects.requireNonNull(getSupportActionBar()).setTitle("Favorites");
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
-                        .replace(R.id.frameLayout, new FavoritesFragment())
-                        .addToBackStack(null)
-                        .commit();
+                if (USER != null) {
+                    Objects.requireNonNull(getSupportActionBar()).setTitle("Favorites");
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
+                            .replace(R.id.frameLayout, new FavoritesFragment())
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else {
+                    dialogLoginRequired.show();
+                }
             }
             else if (item.getItemId() == R.id.miApplications) {
-                Objects.requireNonNull(getSupportActionBar()).setTitle("Applications");
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
-                        .replace(R.id.frameLayout, new ApplicationsFragment())
-                        .addToBackStack(null)
-                        .commit();
+                if (USER != null) {
+                    Objects.requireNonNull(getSupportActionBar()).setTitle("Applications");
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
+                            .replace(R.id.frameLayout, new ApplicationsFragment())
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else {
+                    dialogLoginRequired.show();
+                }
             }
             else if (item.getItemId() == R.id.miMessages) {
+                if (USER != null) {
+                    Bundle userUid = new Bundle();
+                    userUid.putString("user_uid", USER.getUid());
 
-                Bundle userUid = new Bundle();
-                userUid.putString("user_uid", USER.getUid());
+                    ViewMessageFragment viewMessageFragment = new ViewMessageFragment();
+                    viewMessageFragment.setArguments(userUid);
 
-                ViewMessageFragment viewMessageFragment = new ViewMessageFragment();
-                viewMessageFragment.setArguments(userUid);
-
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
-                        .replace(R.id.frameLayout, viewMessageFragment, "VIEW_MESSAGE")
-                        .addToBackStack(null)
-                        .commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
+                            .replace(R.id.frameLayout, viewMessageFragment, "VIEW_MESSAGE")
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else {
+                    dialogLoginRequired.show();
+                }
             }
             else if (item.getItemId() == R.id.miProfile) {
-                Objects.requireNonNull(getSupportActionBar()).setTitle("Profile");
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
-                        .replace(R.id.frameLayout, new ProfileFragment(), "PROFILE")
-                        .addToBackStack(null)
-                        .commit();
+                if (USER != null) {
+                    Objects.requireNonNull(getSupportActionBar()).setTitle("Profile");
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
+                            .replace(R.id.frameLayout, new ProfileFragment(), "PROFILE")
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else {
+                    dialogLoginRequired.show();
+                }
             }
             else {
                 Toast.makeText(this, "Not added yet", Toast.LENGTH_SHORT).show();

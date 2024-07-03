@@ -52,27 +52,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Beast Friend"
-                app:layout_constraintBottom_toTopOf="@+id/btnGetStarted"
+                app:layout_constraintBottom_toTopOf="@+id/btnSignin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnGetStarted"
+                android:id="@+id/btnSignin"
                 style="@style/PetsAdoption.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:backgroundTint="@color/white"
-                app:icon="@drawable/arrow_right_24"
-                app:iconGravity="textEnd"
-                android:text="Get Started"
+                app:icon="@drawable/sign_in_24"
+                app:iconGravity="textStart"
+                android:text="Sign in"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSkip"
+                style="@style/PetsAdoption.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skip for now"
+                android:layout_marginTop="8dp"
+                app:icon="@drawable/arrow_right_24"
+                app:iconGravity="textEnd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSignin" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView2"

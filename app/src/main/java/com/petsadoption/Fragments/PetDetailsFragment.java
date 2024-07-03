@@ -1,5 +1,7 @@
 package com.petsadoption.Fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +14,11 @@ import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.petsadoption.Activities.AuthenticationActivity;
 import com.petsadoption.R;
 import com.petsadoption.Utils.Utils;
 import com.squareup.picasso.Callback;
@@ -21,6 +27,8 @@ import com.squareup.picasso.Picasso;
 import java.util.Objects;
 
 public class PetDetailsFragment extends Fragment {
+
+    private FirebaseUser USER = FirebaseAuth.getInstance().getCurrentUser();
 
     View view;
     MaterialCardView cvPetInformation;
@@ -38,18 +46,34 @@ public class PetDetailsFragment extends Fragment {
         initialize();
         loadPetInformation();
 
+
+        MaterialAlertDialogBuilder dialogLoginRequired = new MaterialAlertDialogBuilder(requireContext());
+        dialogLoginRequired.setTitle("Sign in required");
+        dialogLoginRequired.setMessage("You need an account to access this feature.");
+        dialogLoginRequired.setPositiveButton("Log in", (dialogInterface, i) -> {
+            startActivity(new Intent(getContext(), AuthenticationActivity.class));
+            requireActivity().finish();
+        });
+        dialogLoginRequired.setNeutralButton("Cancel", (dialogInterface, i) -> { });
+
         btnAdopt.setOnClickListener(view -> {
-            Bundle petUid = new Bundle();
-            petUid.putString("pet_uid", uid);
+            if (USER != null) {
+                Bundle petUid = new Bundle();
+                petUid.putString("pet_uid", uid);
 
-            AdoptionFormFragment adoptionFormFragment = new AdoptionFormFragment();
-            adoptionFormFragment.setArguments(petUid);
+                AdoptionFormFragment adoptionFormFragment = new AdoptionFormFragment();
+                adoptionFormFragment.setArguments(petUid);
 
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
-                    .replace(R.id.frameLayout, adoptionFormFragment, "ADOPTION_FORM")
-                    .addToBackStack(null)
-                    .commit();
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.zoom_in_enter, R.anim.zoom_in_exit, R.anim.zoom_out_enter, R.anim.zoom_out_exit)
+                        .replace(R.id.frameLayout, adoptionFormFragment, "ADOPTION_FORM")
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+            else {
+                dialogLoginRequired.show();
+            }
         });
 
         return view;

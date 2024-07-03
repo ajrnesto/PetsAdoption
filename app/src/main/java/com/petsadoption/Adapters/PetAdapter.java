@@ -1,6 +1,8 @@
 package com.petsadoption.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.petsadoption.Activities.AuthenticationActivity;
+import com.petsadoption.Activities.UserActivity;
 import com.petsadoption.Fragments.PetDetailsFragment;
 import com.petsadoption.Objects.Pet;
 import com.petsadoption.R;
@@ -40,7 +44,8 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.petViewHolder>{
     private static final FirebaseDatabase PETS_DB = FirebaseDatabase.getInstance();
     private static final FirebaseStorage PETS_ST = FirebaseStorage.getInstance();
     private static final FirebaseUser USER = FirebaseAuth.getInstance().getCurrentUser();
-    private static DatabaseReference dbPets, dbFavs = PETS_DB.getReference("user_"+USER.getUid()+"_favourites");
+    private static DatabaseReference dbPets;
+    private static DatabaseReference dbFavs;
     private static StorageReference stPets;
 
     static Context context;
@@ -155,6 +160,15 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.petViewHolder>{
             stPets = PETS_ST.getReference("petPhotos").child(arrPets.get(position).getFileName());
             String petName = arrPets.get(position).getName();
 
+            MaterialAlertDialogBuilder dialogLoginRequired = new MaterialAlertDialogBuilder(context);
+            dialogLoginRequired.setTitle("Sign in required");
+            dialogLoginRequired.setMessage("You need an account to access this feature.");
+            dialogLoginRequired.setPositiveButton("Log in", (dialogInterface, i) -> {
+                ((Activity)context).startActivity(new Intent(context, AuthenticationActivity.class));
+                ((Activity)context).finish();
+            });
+            dialogLoginRequired.setNeutralButton("Cancel", (dialogInterface, i) -> { });
+
             if (view == btnRemove) {
                 MaterialAlertDialogBuilder dialogDelete = new MaterialAlertDialogBuilder(itemView.getContext(), R.style.PetsAdoption_Dialog);
                 dialogDelete
@@ -172,30 +186,35 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.petViewHolder>{
                 }).show();
             }
             else if (view == btnFavourite) {
-                String petUid = arrPets.get(position).getUid();
-                dbFavs = PETS_DB.getReference("user_"+USER.getUid()+"_favourites").child(arrPets.get(position).getUid());
-                dbFavs.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (!snapshot.exists()) { // if pet was marked as favourite
-                            btnFavourite.setIconResource(R.drawable.heart_24);
-                            btnFavourite.setIconTintResource(R.color.red_dark);
-                            dbFavs.setValue(petUid);
-                            Toast.makeText(itemView.getContext(), "Added "+petName+" to Favourites", Toast.LENGTH_SHORT).show();
+                if (USER != null) {
+                    String petUid = arrPets.get(position).getUid();
+                    dbFavs = PETS_DB.getReference("user_"+USER.getUid()+"_favourites").child(arrPets.get(position).getUid());
+                    dbFavs.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!snapshot.exists()) { // if pet was marked as favourite
+                                btnFavourite.setIconResource(R.drawable.heart_24);
+                                btnFavourite.setIconTintResource(R.color.red_dark);
+                                dbFavs.setValue(petUid);
+                                Toast.makeText(itemView.getContext(), "Added "+petName+" to Favourites", Toast.LENGTH_SHORT).show();
+                            }
+                            else { // if pet was not yet marked as favourite
+                                btnFavourite.setIconResource(R.drawable.heart_outline_24);
+                                btnFavourite.setIconTintResource(R.color.green_olive);
+                                dbFavs.removeValue();
+                                Toast.makeText(itemView.getContext(), "Removed "+petName+" from Favourites", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else { // if pet was not yet marked as favourite
-                            btnFavourite.setIconResource(R.drawable.heart_outline_24);
-                            btnFavourite.setIconTintResource(R.color.green_olive);
-                            dbFavs.removeValue();
-                            Toast.makeText(itemView.getContext(), "Removed "+petName+" from Favourites", Toast.LENGTH_SHORT).show();
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                    });
+                }
+                else {
+                    dialogLoginRequired.show();
+                }
             }
             else if (view == btnAdopt) {
                 Bundle petUid = new Bundle();

@@ -33,11 +33,11 @@
                 android:textColor="@drawable/fg_chip_state"
                 app:chipBackgroundColor="@drawable/bg_chip_state"
                 app:chipEndPadding="16dp"
-                app:chipIcon="@drawable/chip_dog"
                 app:chipIconSize="32dp"
                 app:chipIconTint="@drawable/fg_chip_state"
                 app:chipStartPadding="16dp"
-                app:chipStrokeColor="@color/green_light" />
+                app:chipStrokeColor="@color/green_light"
+                app:chipIcon="@drawable/chip_dog" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipCat"
